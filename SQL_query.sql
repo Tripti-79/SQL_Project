@@ -24,7 +24,7 @@ select c.case_id,c.case_type,e.evidence_type,e.description evidence_get,o.oname 
 -- case happened on which date and location . Also display  investigating officer of that cases . 
 select c.case_id,c.case_type,to_char(c.case_date,'dd-mm-yyyy')case_date,c.location,o.oname investigating_officer,o.contact from cases c,officers o where c.INVESTIGAT_OFFICER_ID=o.officer_id and c.status='open' order by case_id ;
 
--- list of cases with victim's details and the criminal who is found convicted .
+-- list of cases with victim's details and the criminal who is found accused.
 select v.vname victim,v.contact,v.location victim_residence,c.case_type,cr.cname criminal,cr.CRIMINAL_ID,cr.arrest_date from VICTIMS v,cases c,criminals cr,CRIMINAL_CRIME_LINK ccl,CASE_VICTIM_LINK cvl where c.CASE_ID=ccl.CASE_ID and cr.CRIMINAL_ID=ccl.CRIMINAL_ID and cvl.VICTIM_ID=v.VICTIM_ID and c.case_id=cvl.case_id and ccl.role_in_crime='accused' order by c.CASE_TYPE; 
 
 -- No. of criminals associated with role_in_crime .
